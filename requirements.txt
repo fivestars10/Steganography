@@ -1,0 +1,4 @@
+pycryptodome
+Image
+opencv-python
+numpy
