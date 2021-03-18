@@ -1,11 +1,5 @@
-REQUIREMENTS_DIR:"requirements"
-REQUIREMENTS_LOCAL:"$(REQUIREMENTS_DIR)/local.txt"
-
-PIP:="$(VENV_BIN_DIR)/pip"
-PYTHON=$(shell "$(CMD_FROM_VENV)" "python")
-
 install:
-	@pip install -r $(REQUIREMENTS_LOCAL)
+	@pip install -r requirements/local.txt
 
 clean:
 	@rm -rf .cache
