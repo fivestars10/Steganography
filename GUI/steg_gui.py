@@ -1,31 +1,47 @@
+import kivy
+
+from glob import glob
+from random import randint
+from os.path import join, dirname
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
+from kivy.logger import Logger
+from kivy.uix.scatter import Scatter
+from kivy.properties import StringProperty
 
 
-class SigninWindow(BoxLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-    def validate_user(self):
-        user = self.ids.username_field
-        pwd = self.ids.pwd_field
-        info = self.ids.info
+class Picture(Scatter):
+    '''Picture is the class that will show the image with a white border and a
+    shadow. They are nothing here because almost everything is inside the
+    picture.kv. Check the rule named <Picture> inside the file, and you'll see
+    how the Picture() is really constructed and used.
 
-        uname = user.text
-        passwd = pwd.text
+    The source property will be the filename to show.
+    '''
 
-        if uname == '' or passwd == '':
-            info.text = '[color=#FF0000]Invalid Username or Password[/color]'
-        else:
-            if uname == 'admin' and passwd == 'admin':
-                info.text = '[color=#00FF00]Logged In Successfully![/color]'
-            else:
-                info.text = '[color=#FF0000]Invalid Username or Password[/color]'
+    source = StringProperty(None)
 
-class SigninApp(App):
+
+class PicturesApp(App):
+
     def build(self):
-        return SigninWindow()
+
+        # the root is created in pictures.kv
+        root = self.root
+
+        # get any files into images directory
+        curdir = dirname(__file__)
+        for filename in glob(join(curdir, 'images', '*')):
+            try:
+                # load the image
+                picture = Picture(source=filename, rotation=randint(-30, 30))
+                # add to the main field
+                root.add_widget(picture)
+            except Exception as e:
+                Logger.exception('Pictures: Unable to load <%s>' % filename)
+
+    def on_pause(self):
+        return True
 
 
-if __name__ == "__main__":
-    sa = SigninApp()
-    sa.run()
+if __name__ == '__main__':
+    PicturesApp().run()

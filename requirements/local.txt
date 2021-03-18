@@ -2,3 +2,11 @@ pycryptodome
 Image
 opencv-python
 numpy
+Kivy
+virtualenv
+kivy-deps.gstreamer
+kivy-deps.glew
+kivy-deps.sdl2
+pypiwin32
+pygments
+docutils
