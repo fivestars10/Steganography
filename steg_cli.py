@@ -64,7 +64,7 @@ def main():
             decrypt_key = getpass(prompt='Enter a passphrase to decrypt: ')
             path_image = input("Select an Image file (with extension): ")
             if (path.exists(path_image)):
-                print(util.decode(path_image ,bytes(decrypt_key, 'utf-8')))
+                print("Secret message: " + str(util.decode(path_image ,bytes(decrypt_key, 'utf-8'))))
             else:
                 print("Unable to locate image file!")
 
