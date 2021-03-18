@@ -1,6 +1,6 @@
 ROOT_DIR:=./
 SRC_DIR:=./src
-VENV_BIN_DIR:="venv/bin"
+VENV_BIN_DIR:="usr/bin"
 
 REQUIREMENTS_DIR:"requirements"
 REQUIREMENTS_LOCAL:"$(REQUIREMENTS_DIR)/local.txt"
