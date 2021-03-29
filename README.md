@@ -24,22 +24,30 @@ make install
 ```python
 python3 .\steg_cli.py -h
 
-usage: Steg [-h] [--image IMAGE] [--encode] [--decode]
+usage: Steg [-h] --image IMAGE [--secret SECRET] [--output OUTPUT] [--encode] [--decode]
 
 optional arguments:
   -h, --help            show this help message and exit
   --image IMAGE, -i IMAGE
+                        Specify cover image (with extension)
+  --secret SECRET, -s SECRET
+                        Specify secret image (with extension)
+  --output OUTPUT, -o OUTPUT
                         Specify the path to an image file (with extension)
 
 Encode:
   Encode message into an image file
 
-  --encode, -e          Enable Encoding. Require to run with -i
+  --encode, -e          Enable Encoding.
 
 Decode:
   Decode message from an image file
 
-  --decode, -d          Enable Decoding. Require to run with -i
+  --decode, -d          Enable Decoding.
+
+To run as GUI:
+
+python3 .\steg_gui.py
 
 ```
 
