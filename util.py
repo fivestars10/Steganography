@@ -13,8 +13,7 @@ def encode(path_image, key, saveas, source, encode=True):
     padding = AES.block_size - len(source) % AES.block_size  # calculate needed padding
     source += bytes([padding]) * padding  # Python 2.x: source += chr(padding) * padding
     data = IV + encryptor.encrypt(source)  # store the IV at the beginning and encrypt
-    #print(base64.b64encode(data).decode("latin-1") if encode else data)
-    image.encrypt_data_into_image(path_image, base64.b64encode(data).decode("latin-1"),saveas)
+    image.encrypt_data_into_image(path_image, base64.b64encode(data).decode("latin-1"), saveas)
 
 def decode(path_image, key, decode=True):
     source = image.decrypt_data_from_image(path_image)
@@ -26,5 +25,6 @@ def decode(path_image, key, decode=True):
     data = decryptor.decrypt(source[AES.block_size:])  # decrypt
     padding = data[-1]  # pick the padding value from the end;
     if data[-padding:] != bytes([padding]) * padding:  # Python 2.x: chr(padding) * padding
-        print("Wrong passphrase!")
-    return (data[:-padding]).decode()  # remove the padding
+        return ("Wrong passphrase!")
+    #return data.decode()
+    return (data[:-padding])  # remove the padding
